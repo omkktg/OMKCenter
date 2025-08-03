@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id" ng-app="formApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Peminjaman Ruangan - SmartDoor Access</title>
+  <meta name="description" content="Form Peminjaman Ruangan dengan integrasi WhatsApp dan spreadsheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/viewData.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ViewDataController">
+          <div ng-repeat="booking in bookings" ng-show="!waiting">
+            {{booking.ruangan}}
+            <br>{{booking.tanggal}}<br>{{booking.waktu[0]}}
+          </div>
+          <div class="spinner-container" ng-show="waiting">
+              <div class="spinner"></div>
+              <b>Tunggu sebentar yaa...</b>
+          </div>
+<script src="../controller/viewData.js"></script>
+</body>
+</html>
