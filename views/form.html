@@ -1,91 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id" ng-app="formApp">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Form Peminjaman Ruangan - SmartDoor Access</title>
-  <meta name="description" content="Form Peminjaman Ruangan dengan integrasi WhatsApp dan spreadsheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="../styles/form.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-</head>
-<body ng-controller="FormController">
-  <main class="container" role="main" ng-show="!done">
-    <!-- Tambahkan di dalam div.container -->
-<div class="logo-container">
-  <img src="../image/logo2.png" alt="Logo KTG" class="logo-img" />
-</div>
-    <div>
-    <h1>Form Peminjaman Ruangan</h1>
-    <p class="instruction">Untuk mendapatkan kode SmartDoor, harap isi form peminjaman ruangan dengan lengkap.</p>
-    <form name="bookingForm" ng-submit="submitForm()" novalidate>
-      <div>
-        <label>Nama Lengkap</label>
-        <input type="text" name="nama" ng-model="formData.nama" placeholder="Masukkan nama lengkap" required />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Form Peminjaman Ruangan - SmartDoor Access</title>
+    <meta
+      name="description"
+      content="Form Peminjaman Ruangan dengan integrasi WhatsApp dan spreadsheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/form.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-controller="FormController">
+    <main class="container" role="main" ng-show="!done">
+      <!-- Tambahkan di dalam div.container -->
+      <div class="logo-container">
+        <img src="../image/logo2.png" alt="Logo KTG" class="logo-img" />
       </div>
       <div>
-        <label>Subseksi / Wilayah / Acara</label>
-        <input type="text" name="subseksi" ng-model="formData.subseksi" placeholder="Masukkan subseksi, wilayah atau acara" required />
-      </div>
-      <div>
-        <label>Ruangan</label>
-        <select name="ruangan" ng-model="formData.ruangan" ng-change="updateDisabledCheckboxes()" required>
-          <option value="" disabled selected>Pilih ruangan</option>
-          <option value="Kevin">Kevin: Ruang Meeting Besar</option>
-          <option value="Oliver">Oliver: Warehouse</option>
-          <option value="Ludwig">Ludwig: Ruang Musik</option>
-          <option value="Natalia">Natalia: Innovation Room (Besar)</option>
-          <option value="Marta">Marta: Innovation Room (Kecil)</option>
-          <option value="Helena">Helena: Ruang Meeting (Kecil)</option>
-        </select>
-      </div>
-      <div>
-        <label>Tanggal Peminjaman</label>
-        <input type="date" name="tanggal" ng-model="formData.tanggal" ng-change="updateDisabledCheckboxes()" min="{{today | date:'yyyy-MM-dd'}}" required />
-      </div>
-      <fieldset>
-        <legend><span class="material-icons" aria-hidden="true">schedule</span>Waktu Peminjaman</legend>
-        <div class="time">
-          <p style="color:#999;" ng-if="!chosen">Silakan pilih ruangan dan tanggal untuk melihat waktu yang tersedia.</p>
-          <div ng-if="waiting" class="loading">
-                <div class="dots-loader">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
+        <h1>Form Peminjaman Ruangan</h1>
+        <p class="instruction">
+          Untuk mendapatkan kode SmartDoor, harap isi form peminjaman ruangan
+          dengan lengkap.
+        </p>
+        <form name="bookingForm" ng-submit="submitForm()" novalidate>
+          <div>
+            <label>Paroki Mana?</label>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="paroki"
+                  ng-model="formData.pilihanParoki"
+                  value="Puspa Gading"
+                  required
+                />
+                Puspa Gading
+              </label>
             </div>
-          <label ng-repeat="waktu in waktuTersedia"
-       ng-class="waktu.disabled ? 'time-checkboxes-disabled' : (waktu.checked ? 'time-checkboxes-checked' : 'time-checkboxes')">
-            <input type="checkbox"
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="paroki"
+                  ng-model="formData.pilihanParoki"
+                  value="Lainnya"
+                  required
+                />
+                Lainnya
+              </label>
+            </div>
+
+            <div
+              ng-show="formData.pilihanParoki == 'Lainnya'"
+              style="margin-top: 10px"
+            >
+              <input
+                type="text"
+                name="parokiLain"
+                ng-model="formData.parokiCustom"
+                placeholder="Masukkan nama paroki Anda"
+                ng-required="formData.pilihanParoki == 'Lainnya'"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label>Nama Lengkap</label>
+            <input
+              type="text"
+              name="nama"
+              ng-model="formData.nama"
+              placeholder="Masukkan nama lengkap"
+              required
+            />
+          </div>
+          <div>
+            <label>Subseksi / Wilayah / Acara</label>
+            <input
+              type="text"
+              name="subseksi"
+              ng-model="formData.subseksi"
+              placeholder="Masukkan subseksi, wilayah atau acara"
+              required
+            />
+          </div>
+          <div>
+            <label>Ruangan</label>
+            <select
+              name="ruangan"
+              ng-model="formData.ruangan"
+              ng-change="updateDisabledCheckboxes()"
+              required
+            >
+              <option value="" disabled selected>Pilih ruangan</option>
+              <option value="Kevin">Kevin: Ruang Meeting Besar</option>
+              <option value="Oliver">Oliver: Warehouse</option>
+              <option value="Ludwig">Ludwig: Ruang Musik</option>
+              <option value="Natalia">Natalia: Innovation Room (Besar)</option>
+              <option value="Marta">Marta: Innovation Room (Kecil)</option>
+              <option value="Helena">Helena: Ruang Meeting (Kecil)</option>
+            </select>
+          </div>
+          <div>
+            <label>Tanggal Peminjaman</label>
+            <input
+              type="date"
+              name="tanggal"
+              ng-model="formData.tanggal"
+              ng-change="updateDisabledCheckboxes()"
+              min="{{today | date:'yyyy-MM-dd'}}"
+              required
+            />
+          </div>
+          <fieldset>
+            <legend>
+              <span class="material-icons" aria-hidden="true">schedule</span
+              >Waktu Peminjaman
+            </legend>
+            <div class="time">
+              <p style="color: #999" ng-if="!chosen">
+                Silakan pilih ruangan dan tanggal untuk melihat waktu yang
+                tersedia.
+              </p>
+              <div ng-if="waiting" class="loading">
+                <div class="dots-loader">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+              <label
+                ng-repeat="waktu in waktuTersedia"
+                ng-class="waktu.disabled ? 'time-checkboxes-disabled' : (waktu.checked ? 'time-checkboxes-checked' : 'time-checkboxes')"
+              >
+                <input
+                  type="checkbox"
                   name="waktu"
                   ng-value="waktu.label"
                   ng-checked="waktu.checked"
                   ng-click="toggleWaktu(waktu)"
-                  ng-disabled="waktu.disabled" />
-            <span>{{ waktu.label }}</span>
-          </label>
-        </div>
-      </fieldset>
-      <div>
-        <label>No WhatsApp</label>
-        <input type="tel" name="wa" ng-model="formData.wa" ng-pattern="/^08[0-9]{8,12}$/" placeholder="081234567890" required />
+                  ng-disabled="waktu.disabled"
+                />
+                <span>{{ waktu.label }}</span>
+              </label>
+            </div>
+          </fieldset>
+          <div>
+            <label>No WhatsApp</label>
+            <input
+              type="tel"
+              name="wa"
+              ng-model="formData.wa"
+              ng-pattern="/^08[0-9]{8,12}$/"
+              placeholder="081234567890"
+              required
+            />
+          </div>
+          <div>
+            <label>Alasan Pemakaian Ruangan</label>
+            <input
+              type="text"
+              name="Alasan"
+              ng-model="formData.Alasan"
+              placeholder="Masukkan Alasanmu!"
+              required
+            />
+          </div>
+          <button type="submit">Kirim Permintaan</button>
+        </form>
       </div>
-      <div>
-        <label>Alasan Pemakaian Ruangan</label>
-        <input type="text" name="Alasan" ng-model="formData.Alasan" placeholder="Masukkan Alasanmu!" required />
-      </div>
-      <button type="submit">Kirim Permintaan</button>
-    </form>
-    </div>
-  </main>
-      <div class="spinner-container" ng-show="done">
-        <div class="spinner"></div>
-        <b>Tunggu sebentar yaa...</b>
+    </main>
+    <div class="spinner-container" ng-show="done">
+      <div class="spinner"></div>
+      <b>Tunggu sebentar yaa...</b>
     </div>
 
-<script src="../controller/form.js"></script>
-</body>
+    <script src="../controller/form.js"></script>
+  </body>
 </html>

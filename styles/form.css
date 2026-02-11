@@ -1,127 +1,140 @@
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'Lexend', sans-serif;
-    background: linear-gradient(135deg, #A92028 0%, #1358A3 70%, #E7E0D5 100%);
-    color: #1e1e1e;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 32px 16px 64px;
-  }
-  body, h1, h2, h3, p, label, input, select, textarea, button, span, div {
-  font-family: 'Lexend', sans-serif;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-  /* Container */
-  .container {
-    background: rgba(243,234,219,0.95);
-    max-width: 480px;
-    width: 100%;
-    border-radius: 16px;
-    padding: 32px 32px 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  }
-  h1 {
-    font-weight: 700;
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-    color: #2062f7;
-    text-align: center;
-  }
-  p.instruction {
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 28px;
-    color: #db2828;
-    font-size: 1rem;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  label {
-    font-weight: 600;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #2062f7;
-  }
-  .material-icons {
-    font-size: 20px;
-    color: #db2828;
-  }
-  input[type="text"],
-  input[type="date"],
-  input[type="tel"],
-  select {
-    padding: 12px 16px;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: 2px solid #2062f7;
-    transition: border-color 0.3s ease;
-    width: 100%;
-    color: #1e1e1e;
-  }
-  input[type="text"]:focus,
-  input[type="date"]:focus,
-  input[type="tel"]:focus,
-  select:focus {
-    outline: none;
-    border-color: #db2828;
-  }
- 
-  .time{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+body {
+  margin: 0;
+  font-family: "Lexend", sans-serif;
+  background: linear-gradient(135deg, #a92028 0%, #1358a3 70%, #e7e0d5 100%);
+  color: #1e1e1e;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 32px 16px 64px;
+}
+body,
+h1,
+h2,
+h3,
+p,
+label,
+input,
+select,
+textarea,
+button,
+span,
+div {
+  font-family: "Lexend", sans-serif;
+}
+/* Container */
+.container {
+  background: rgba(243, 234, 219, 0.95);
+  max-width: 480px;
+  width: 100%;
+  border-radius: 16px;
+  padding: 32px 32px 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+h1 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #2062f7;
+  text-align: center;
+}
+p.instruction {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 28px;
+  color: #db2828;
+  font-size: 1rem;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2062f7;
+}
+.material-icons {
+  font-size: 20px;
+  color: #db2828;
+}
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+select {
+  padding: 12px 16px;
+  font-size: 1rem;
+  border-radius: 12px;
+  border: 2px solid #2062f7;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  color: #1e1e1e;
+}
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+select:focus {
+  outline: none;
+  border-color: #db2828;
+}
 
-  .time-checkboxes {
-    flex: 1 1 45%;
-    background: #2062f7;
-    color: white;
-    border-radius: 12px;
-    padding: 10px 0;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    transition: background-color 0.3s ease;
-  }
+.time {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
-    .time-checkboxes-checked {
-    flex: 1 1 45%;
-    background: #db2828;
-    color: white;
-    border-radius: 12px;
-    padding: 10px 0;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    transition: background-color 0.3s ease;
-  }
+.time-checkboxes {
+  flex: 1 1 45%;
+  background: #2062f7;
+  color: white;
+  border-radius: 12px;
+  padding: 10px 0;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
 
-      .time-checkboxes-disabled {
-    flex: 1 1 45%;
-    background: #e0e0e0;
-    color: rgb(116, 108, 108);
-    border-radius: 12px;
-    padding: 10px 0;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    transition: background-color 0.3s ease;
-  }
+.time-checkboxes-checked {
+  flex: 1 1 45%;
+  background: #db2828;
+  color: white;
+  border-radius: 12px;
+  padding: 10px 0;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.time-checkboxes-disabled {
+  flex: 1 1 45%;
+  background: #e0e0e0;
+  color: rgb(116, 108, 108);
+  border-radius: 12px;
+  padding: 10px 0;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
 
 .time-checkboxes input[type="checkbox"],
 .time-checkboxes-checked input[type="checkbox"],
@@ -137,7 +150,9 @@
   cursor: pointer;
 }
 
-.time-checkboxes span, .time-checkboxes-checked span, .time-checkboxes-disabled span {
+.time-checkboxes span,
+.time-checkboxes-checked span,
+.time-checkboxes-disabled span {
   display: block;
   padding-left: 36px;
   position: relative;
@@ -146,8 +161,8 @@
 .time-checkboxes span::before,
 .time-checkboxes-checked span::before,
 .time-checkboxes-disabled span::before {
-  content: 'check_circle';
-  font-family: 'Material Icons';
+  content: "check_circle";
+  font-family: "Material Icons";
   position: absolute;
   left: 8px;
   top: 50%;
@@ -164,41 +179,41 @@
   opacity: 1;
 }
 
-  button[type="submit"] {
-    background: #db2828;
-    color: #f3eadb;
-    font-weight: 700;
-    padding: 14px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+button[type="submit"] {
+  background: #db2828;
+  color: #f3eadb;
+  font-weight: 700;
+  padding: 14px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background: #a31f1f;
+  outline: none;
+}
+/* Responsive */
+@media (max-width: 480px) {
+  .time-checkboxes label {
+    flex: 1 1 100%;
   }
-  button[type="submit"]:hover,
-  button[type="submit"]:focus {
-    background: #a31f1f;
-    outline: none;
-  }
-  /* Responsive */
-  @media (max-width: 480px) {
-    .time-checkboxes label {
-      flex: 1 1 100%;
-    }
-  }
-  /* Error message style */
-  .error-message {
-    color: #db2828;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-top: -12px;
-  }
+}
+/* Error message style */
+.error-message {
+  color: #db2828;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: -12px;
+}
 
-  .loading{
-    width: 100%;
-  }
+.loading {
+  width: 100%;
+}
 
-  .dots-loader {
+.dots-loader {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,22 +251,26 @@
   align-items: center;
   height: 100vh;
   font-weight: 600;
-  color:#f3f3f3
+  color: #f3f3f3;
 }
 
 .spinner {
   width: 48px;
   height: 48px;
-  border: 5px solid #f3f3f3;        /* Light gray background */
-  border-top: 5px solid #3498db;    /* Blue spinning part */
+  border: 5px solid #f3f3f3; /* Light gray background */
+  border-top: 5px solid #3498db; /* Blue spinning part */
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin: 20px auto; /* Center horizontally */
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .logo-container {
