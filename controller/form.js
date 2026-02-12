@@ -14,7 +14,6 @@ angular.module("formApp", []).controller("FormController", [
     };
 
     $scope.submitForm = function () {
-      // Logika untuk menentukan nama paroki yang akan dikirim
       let parokiFinal = $scope.formData.pilihanParoki;
       if ($scope.formData.pilihanParoki === "Lainnya") {
         parokiFinal = $scope.formData.parokiCustom;
@@ -52,10 +51,44 @@ angular.module("formApp", []).controller("FormController", [
         } else {
           $scope.done = true;
 
-          // Menggabungkan data paroki yang benar ke dalam payload
           const payload = Object.assign({}, $scope.formData);
-          payload.paroki = parokiFinal; // Menambahkan field paroki hasil filter
+          payload.paroki = parokiFinal;
           payload.waktu = waktuTerpilih;
+
+          console.log(waktuTerpilih);
+
+          const deconstructedWaktu = waktuTerpilih.reduce((acc, current) => {
+            return acc.concat(current.split("-"));
+          }, []);
+
+          console.log(deconstructedWaktu);
+
+          let formattedWaktu = "";
+          let lastTime = "";
+          let lastTimeNum = 0;
+
+          for (let i = 0; i < deconstructedWaktu.length; i += 2) {
+            if (i == 0) {
+              formattedWaktu = deconstructedWaktu[i];
+            } else if (i == deconstructedWaktu.length - 2) {
+              if (deconstructedWaktu[i] != deconstructedWaktu[i - 1]) {
+                formattedWaktu +=
+                  "-" +
+                  deconstructedWaktu[i - 1] +
+                  ", " +
+                  deconstructedWaktu[i];
+              }
+              formattedWaktu += "-" + deconstructedWaktu[i + 1];
+            } else {
+              if (deconstructedWaktu[i] != deconstructedWaktu[i - 1]) {
+                formattedWaktu +=
+                  "-" +
+                  deconstructedWaktu[i - 1] +
+                  ", " +
+                  deconstructedWaktu[i];
+              }
+            }
+          }
 
           const formEncoded = new URLSearchParams(payload).toString();
 
@@ -69,21 +102,20 @@ angular.module("formApp", []).controller("FormController", [
             data: formEncoded,
           }).then(
             function success() {
-              // Pesan WhatsApp sekarang menyertakan informasi Paroki
               const msg =
                 `Halo PIC Ruangan,%0A` +
                 `Saya ingin mengajukan peminjaman ruangan:%0A%0A` +
                 `Nama: ${payload.nama}%0A` +
-                `Paroki: ${payload.paroki}%0A` + // Menampilkan paroki yang benar di WA
+                `Paroki: ${payload.paroki}%0A` +
                 `Subseksi: ${payload.subseksi}%0A` +
                 `Ruangan: ${payload.ruangan}%0A` +
-                `Tanggal: ${payload.tanggal}%0A` +
-                `Waktu: ${payload.waktu.join(", ")}%0A` +
+                `Tanggal: ${payload.tanggal.toDateString()}%0A` +
+                `Waktu: ${formattedWaktu}%0A` +
                 `WA: ${payload.wa}%0A` +
                 `Alasan: ${payload.Alasan}%0A%0A` +
                 `Mohon konfirmasi dan bantuannya untuk akses smart door. Terima kasih.`;
 
-              window.location.href = `https://wa.me/6285117552527?text=${msg}`;
+              window.open(`https://wa.me/6285117552527?text=${msg}`, "_blank");
             },
             function error() {
               $scope.done = false;
@@ -104,11 +136,10 @@ angular.module("formApp", []).controller("FormController", [
 
       $http
         .get(
-          "https://script.google.com/macros/s/AKfycbwk3iGg8luuMUahGj-GdwP3bZVmntvS_Snh5Hk0M1-3UAKzfoptPjUS7K1fdteBvwQFeg/exec",
+          "https://script.google.com/macros/s/AKfycbzDoqig8KdVrK7RUFdIAbQnzJEfZbRIKOZLa9bn-ABZsKq0RVd5ZGb3ju2DIjyTOKIIpA/exec",
         )
         .then(function (res) {
           const booked = res.data;
-          console.log(booked);
           const allWaktu = [
             "08:00-09:00",
             "09:00-10:00",
